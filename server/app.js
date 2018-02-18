@@ -1,3 +1,5 @@
+import router from './router';
+
 const Koa = require('koa');
 const app = new Koa();
 
@@ -9,6 +11,8 @@ app.use(async (ctx, next) => {
     const ms = Date.now() - start;
     console.log(`${ctx.method} ${ctx.url} - ${ms}`);
 });
+
+app.use(router());
 
 // response
 
