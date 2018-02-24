@@ -11,6 +11,14 @@ import response from './middleware/response';
 import errorfilter from './middleware/errorfilter';
 
 const app = new Koa();
+const AV = require('leancloud-storage');
+const APP_ID = '1QVqKjjJIw4y55H1zOIMWtKm-gzGzoHsz';
+const APP_KEY = 'bjKp3vVsqkMHH3Ck0kFzFey1';
+
+AV.init({
+    appId: APP_ID,
+    appKey: APP_KEY
+});
 
 // logger
 app.use(convert(logger()));

@@ -6,5 +6,6 @@ const router = koaRouter({
 });
 
 router.get('/articles', ArticleController.index);
+router.get('/articles/:id', ArticleController.show);
 
 export default router;

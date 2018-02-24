@@ -1,11 +1,9 @@
-class ArticleController {
+import Controller from './controller';
 
-    // 用户注册
-    async index(ctx) {
-        // await ……
-        return ctx.success({ data: [] });
+class ArticleController extends Controller {
+    constructor() {
+        super('Article');
     }
-
 }
 
 export default new ArticleController();
