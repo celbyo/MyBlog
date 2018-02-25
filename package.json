@@ -4,7 +4,7 @@
   "description": "",
   "main": "entrypoint.js",
   "scripts": {
-    "start": "npm run dev:node",
+    "start": "node entrypoint.js",
     "compile": "USE_LOCAL_NODE_MODULES=true webpack -p --hide-modules",
     "dev:node": "set NODE_ENV=local && nodemon -w routes -w rest entrypoint.js",
     "dev:webpack": "NODE_ENV=local webpack-dev-server",
