@@ -7,6 +7,7 @@ const logger = require('koa-logger');
 const koaBody = require('koa-body');
 
 import restRouter from './rest';
+import pageRouter from './routes';
 import response from './middleware/response';
 import errorfilter from './middleware/errorfilter';
 
@@ -59,6 +60,8 @@ app.use(errorfilter);
 
 app
     .use(restRouter.routes())
-    .use(restRouter.allowedMethods());
+    .use(restRouter.allowedMethods())
+    .use(pageRouter.routes())
+    .use(pageRouter.allowedMethods());
 
 app.listen(3000);
