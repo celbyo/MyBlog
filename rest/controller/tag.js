@@ -7,8 +7,7 @@ class TagController {
         const query = new AV.Query(model);
         query.equalTo('status', 'A');
         const objects = await query.find();
-        const total = await query.count();
-        return ctx.success({ data: { ipp, page, total: +total, objects } });
+        return ctx.success({ data: objects });
     }
 
     async create(ctx) {
