@@ -2,8 +2,11 @@ const router = require('koa-router')();
 
 router
     //  页面
-    .get('/', (ctx) => {
-        ctx.body = 'hello world!';
+    .get('/admin', async (ctx) => {
+        await ctx.render('admin');
     })
+    .get('/', async (ctx) => {
+        await ctx.render('home');
+    });
 
 export default router;
