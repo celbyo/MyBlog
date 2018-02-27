@@ -1,15 +1,17 @@
+import path from 'path';
 import Koa from 'koa';
 import views from 'koa-views';
-
-const convert = require('koa-convert');
-const logger = require('koa-logger');
-// const bodyparser = require('koa-bodyparser')();
-const koaBody = require('koa-body');
-
+import convert from 'koa-convert';
+import logger from 'koa-logger';
+import koaBody from 'koa-body';
+import staticServer from 'koa-static';
 import restRouter from './rest';
 import pageRouter from './routes';
 import response from './middleware/response';
 import errorfilter from './middleware/errorfilter';
+import devMiddleware from './middleware/devMiddleware';
+
+// const bodyparser = require('koa-bodyparser')();
 
 const app = new Koa();
 const AV = require('leancloud-storage');
@@ -21,11 +23,17 @@ AV.init({
     appKey: APP_KEY
 });
 
+// webpack
+const webpack = require("webpack");
+const webpackConfig = require("./webpack.config.babel");
+const compiler = webpack(webpackConfig);
+app.use(devMiddleware(compiler));
+
 // logger
 app.use(convert(logger()));
 
 // static
-app.use(require('koa-static')(__dirname + 'public'));
+app.use(staticServer(path.join(__dirname, 'public/')));
 
 // parse body
 app.use(koaBody({

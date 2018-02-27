@@ -12,6 +12,14 @@
                 "regenerator": true,
                 "moduleName": "babel-runtime"
             }
+        ],
+        [
+            "import",
+            {
+                "libraryName": "antd",
+                "libraryDirectory": "es",
+                "style": "css"
+            }
         ]
     ]
 }
