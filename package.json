@@ -4,8 +4,8 @@
   "description": "",
   "main": "entrypoint.js",
   "scripts": {
-    "start": "set NODE_ENV=production&&npm run compile && node entrypoint.js",
-    "compile": "set USE_LOCAL_NODE_MODULES=true && webpack -p --mode production --hide-modules",
+    "start": "set NODE_ENV=production&&node entrypoint.js",
+    "compile": "set NODE_ENV=production&& webpack -p --mode production --hide-modules",
     "dev:node": "set NODE_ENV=local&& nodemon -w routes -w rest entrypoint.js",
     "dev:webpack": "set NODE_ENV=local&& webpack-dev-server --mode development",
     "dev": "npm run dev:node & npm run dev:webpack --port=8080",
