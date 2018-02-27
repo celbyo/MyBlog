@@ -9,7 +9,6 @@ class Home extends Component {
             <Layout>
                 <Header>
                     <Menu
-                        theme="light"
                         mode="horizontal"
                         defaultSelectedKeys={['1']}
                         style={{ lineHeight: '64px' }}

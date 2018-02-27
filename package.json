@@ -4,8 +4,8 @@
   "description": "",
   "main": "entrypoint.js",
   "scripts": {
-    "start": "node entrypoint.js",
-    "compile": "set USE_LOCAL_NODE_MODULES=true&& webpack -p --hide-modules",
+    "start": "set NODE_ENV=production&&npm run compile && node entrypoint.js",
+    "compile": "set USE_LOCAL_NODE_MODULES=true && webpack -p --mode production --hide-modules",
     "dev:node": "set NODE_ENV=local&& nodemon -w routes -w rest entrypoint.js",
     "dev:webpack": "set NODE_ENV=local&& webpack-dev-server --mode development",
     "dev": "npm run dev:node & npm run dev:webpack --port=8080",
@@ -52,7 +52,6 @@
     "cache-loader": "^1.2.1",
     "clean-webpack-plugin": "^0.1.18",
     "css-loader": "^0.28.10",
-    "extract-text-webpack-plugin": "^3.0.2",
     "postcss-loader": "^2.1.1",
     "react-hot-loader": "^3.1.3",
     "style-loader": "^0.20.2",

@@ -1,4 +1,5 @@
 import path from 'path';
+import fs from 'fs';
 import Koa from 'koa';
 import views from 'koa-views';
 import convert from 'koa-convert';
@@ -12,6 +13,7 @@ import errorfilter from './middleware/errorfilter';
 import devMiddleware from './middleware/devMiddleware';
 
 // const bodyparser = require('koa-bodyparser')();
+const isDev = process.env.NODE_ENV !== 'production';
 
 const app = new Koa();
 const AV = require('leancloud-storage');
@@ -24,10 +26,12 @@ AV.init({
 });
 
 // webpack
-const webpack = require("webpack");
-const webpackConfig = require("./webpack.config.babel");
-const compiler = webpack(webpackConfig);
-app.use(devMiddleware(compiler));
+if (isDev) {
+    const webpack = require("webpack");
+    const webpackConfig = require("./webpack.config.babel");
+    const compiler = webpack(webpackConfig);
+    app.use(devMiddleware(compiler));
+}
 
 // logger
 app.use(convert(logger()));
@@ -60,6 +64,21 @@ app.use(async (ctx, next) => {
     await next();
     const ms = new Date() - start;
     console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
+});
+
+// add jsWebpack
+app.use(async (ctx, next) => {
+    ctx.state.jsWebpack = (name) => {
+        if (!fs.existsSync('./public/webpack-assets.json')) {
+            return;
+        }
+        const jsMap = require('./public/webpack-assets.json');
+        if (!jsMap || !jsMap[name]) {
+            return;
+        }
+        return path.parse(jsMap[name]['js']).base;
+    };
+    await next();
 });
 
 // middleware
