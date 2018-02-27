@@ -47,7 +47,7 @@ if (isDevEnv) {
 const reactLoader = {
     test: /\.js$/,
     exclude: /node_modules/,
-    use: !isDevEnv ? ['react-hot-loader', 'babel-loader'] : ['cache-loader', 'babel-loader'],
+    use: isDevEnv ? ['babel-loader'] : ['cache-loader', 'babel-loader'],
 };
 
 const postcssLoader = {
@@ -59,7 +59,14 @@ const postcssLoader = {
 
 const cssLoader = {
     test: /\.css$/,
+    exclude: /node_modules/,
     use: ['style-loader', 'css-loader?modules', postcssLoader]
+};
+
+const commonCssLoader = {
+    test: /\.css$/,
+    include: /node_modules/,
+    use: ['style-loader', 'css-loader']
 };
 
 const imageLoader = {
@@ -74,6 +81,7 @@ const imageLoader = {
 
 const webpackConfig = [
     {
+        mode: isDevEnv ? 'development' : 'production',
         entry: Object.assign({}, entry
             // , {
             // 'admin-vendor': [
@@ -92,7 +100,7 @@ const webpackConfig = [
         },
         plugins,
         module: {
-            rules: [reactLoader, cssLoader, imageLoader]
+            rules: [reactLoader, cssLoader, commonCssLoader, imageLoader]
         },
         resolve: {
             modules: [
@@ -117,4 +125,4 @@ webpackConfig.devServer = {
     disableHostCheck: true,
 };
 
-export default webpackConfig
+export default webpackConfig;

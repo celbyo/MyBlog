@@ -7,7 +7,7 @@
     "start": "node entrypoint.js",
     "compile": "set USE_LOCAL_NODE_MODULES=true&& webpack -p --hide-modules",
     "dev:node": "set NODE_ENV=local&& nodemon -w routes -w rest entrypoint.js",
-    "dev:webpack": "set NODE_ENV=local&& webpack-dev-server",
+    "dev:webpack": "set NODE_ENV=local&& webpack-dev-server --mode development",
     "dev": "npm run dev:node & npm run dev:webpack --port=8080",
     "test": "NODE_ENV=test mocha --compilers js:babel-register --recursive"
   },
