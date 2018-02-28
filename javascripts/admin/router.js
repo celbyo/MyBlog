@@ -7,7 +7,7 @@ const { ConnectedRouter } = routerRedux;
 function RouterConfig({ history, app }) {
     return (
         <ConnectedRouter history={history}>
-            <Route path="/" component={Home} />
+            <Route path="/admin" component={Home} />
         </ConnectedRouter>
     );
 }

@@ -1,0 +1,13 @@
+:global(#app) {
+    display: flex;
+    height: 100%;
+}
+
+.header {
+    height: 56px;
+    background-color: #fff;
+}
+
+.content {
+    padding: 20px 50px;
+}

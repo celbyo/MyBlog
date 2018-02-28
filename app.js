@@ -37,7 +37,7 @@ if (isDev) {
 app.use(convert(logger()));
 
 // static
-app.use(staticServer(path.join(__dirname, 'public/')));
+app.use(staticServer(path.join(__dirname, 'public/')))y;
 
 // parse body
 app.use(koaBody({
@@ -76,7 +76,7 @@ app.use(async (ctx, next) => {
         if (!jsMap || !jsMap[name]) {
             return;
         }
-        return path.parse(jsMap[name]['js']).base;
+        return '/' + path.parse(jsMap[name]['js']).base;
     };
     await next();
 });
