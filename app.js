@@ -41,6 +41,13 @@ if (isDev) {
     const webpackConfig = require("./webpack.config.babel");
     const compiler = webpack(webpackConfig);
     app.use(devMiddleware(compiler));
+    // log record
+    app.use(async (ctx, next) => {
+        const start = new Date();
+        await next();
+        const ms = new Date() - start;
+        console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
+    });
 }
 
 // logger
@@ -67,14 +74,6 @@ app.use(koaBody({
 app.use(views(__dirname + '/views', {
     extension: 'pug',
 }));
-
-// log record
-app.use(async (ctx, next) => {
-    const start = new Date();
-    await next();
-    const ms = new Date() - start;
-    console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
-});
 
 // add jsWebpack
 app.use(async (ctx, next) => {
