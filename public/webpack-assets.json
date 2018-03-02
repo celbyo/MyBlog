@@ -1,1 +1,8 @@
-{"client-index":{"js":"C:\\Workspaces\\MyBlog\\public\\client-index-50d35dafb77cc6210e73.js"},"admin-index":{"js":"C:\\Workspaces\\MyBlog\\public\\admin-index-e0b7521b22da33298cc3.js"}}
+{
+    "client-index": {
+        "js": "/Workspaces/MyBlog/public/client-index-50d35dafb77cc6210e73.js"
+    },
+    "admin-index": {
+        "js": "/Workspaces/MyBlog/public/admin-index-67eae9df94e7319d2e90.js"
+    }
+}
