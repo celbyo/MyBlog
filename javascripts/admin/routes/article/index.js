@@ -1,11 +1,4 @@
-import React, { Component } from 'react';
+import List from './list';
+import Create from './create';
 
-class ArticleForm extends Component {
-    render() {
-        return (
-            <div>ArticleForm</div>
-        );
-    }
-}
-
-export default ArticleForm;
+export default { List, Create };

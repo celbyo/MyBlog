@@ -17,13 +17,23 @@ const isDev = process.env.NODE_ENV !== 'production';
 
 const app = new Koa();
 const AV = require('leancloud-storage');
-const APP_ID = '1QVqKjjJIw4y55H1zOIMWtKm-gzGzoHsz';
-const APP_KEY = 'bjKp3vVsqkMHH3Ck0kFzFey1';
 
-AV.init({
-    appId: APP_ID,
-    appKey: APP_KEY
-});
+if (isDev) {
+    const config = require('./leanclound.config').default;
+    AV.init({
+        appId: config.APP_ID,
+        appKey: config.APP_KEY,
+        masterKey: config.MASTER_KEY,
+    });
+} else {
+    AV.init({
+        appId: prod.env.LEANCLOUD_APP_ID,
+        appKey: prod.env.LEANCLOUD_APP_KEY,
+        masterKey: prod.env.LEANCLOUD_APP_MASTER_KEY,
+    });
+}
+
+AV.Cloud.useMasterKey();
 
 // webpack
 if (isDev) {
@@ -37,7 +47,7 @@ if (isDev) {
 app.use(convert(logger()));
 
 // static
-app.use(staticServer(path.join(__dirname, 'public/')))y;
+app.use(staticServer(path.join(__dirname, 'public/')));
 
 // parse body
 app.use(koaBody({

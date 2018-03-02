@@ -4,7 +4,8 @@ import { Switch, Route, Redirect, Link, routerRedux } from 'dva/router';
 import { Layout, Menu, Icon } from 'antd';
 import styles from './index.css';
 
-import ArticleForm from './article';
+import Article from './article';
+import Tag from './tag';
 import NotFound from './notfound';
 
 const { Header, Content, Footer } = Layout;
@@ -25,7 +26,7 @@ class Home extends Component {
                         defaultSelectedKeys={[this.initMenu]}
                         style={{ lineHeight: '56px' }}
                     >
-                        <Menu.Item key="/admin">
+                        <Menu.Item key="/admin/articles">
                             <Link to="/admin/articles">
                                 <Icon type="file-markdown" />
                                 博客
@@ -47,7 +48,9 @@ class Home extends Component {
                 <Content className={styles.content}>
                     <Switch>
                         <Redirect exact from='/admin' to='/admin/article' />
-                        <Route path='/admin/articles' component={ArticleForm} />
+                        <Route exact path='/admin/articles' component={Article.List} />
+                        <Route exact path='/admin/articles/create' component={Article.Create} />
+                        <Route exact path='/admin/tags' component={Tag} />
                         <Route component={NotFound} />
                     </Switch>
                 </Content>

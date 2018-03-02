@@ -4,11 +4,11 @@
   "description": "",
   "main": "entrypoint.js",
   "scripts": {
-    "start": "set NODE_ENV=production&&node entrypoint.js",
-    "compile": "set NODE_ENV=production&& webpack -p --mode production --hide-modules",
-    "dev:node": "set NODE_ENV=local&& nodemon -w routes -w rest entrypoint.js",
-    "dev:webpack": "set NODE_ENV=local&& webpack-dev-server --mode development",
-    "dev": "npm run dev:node&npm run dev:webpack --port=8080",
+    "start": "cross-env NODE_ENV=production node entrypoint.js",
+    "compile": "cross-env NODE_ENV=production webpack -p --mode production --hide-modules",
+    "dev:node": "cross-env NODE_ENV=local nodemon -w routes -w rest entrypoint.js",
+    "dev:webpack": "cross-env NODE_ENV=local webpack-dev-server --mode development",
+    "dev": "npm-run-all --parallel dev:node dev:webpack",
     "test": "NODE_ENV=test mocha --compilers js:babel-register --recursive"
   },
   "repository": {
@@ -32,8 +32,10 @@
     "babel-preset-latest": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-register": "^6.26.0",
+    "braft-editor": "^1.6.0",
     "cache-loader": "^1.2.1",
     "clean-webpack-plugin": "^0.1.18",
+    "cross-env": "^5.1.3",
     "css-loader": "^0.28.10",
     "dva": "^2.1.0",
     "koa": "^2.5.0",
@@ -51,6 +53,8 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-hot-loader": "^4.0.0",
+    "react-markdown": "^3.2.2",
+    "react-quill": "^1.2.6",
     "style-loader": "^0.20.2",
     "tracer": "^0.8.12",
     "webpack": "^4.0.0",
@@ -60,5 +64,8 @@
   },
   "engines": {
     "node": "8.7.0"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.2"
   }
 }

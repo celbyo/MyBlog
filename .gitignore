@@ -1,2 +1,5 @@
 node_modules
 .*
+笔记.md
+*_bak*
+leanclound.config.js
